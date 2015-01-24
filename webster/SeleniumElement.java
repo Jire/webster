@@ -16,6 +16,10 @@ final class SeleniumElement implements Element {
 	private SeleniumElement(WebElement element) {
 		this.element = element;
 	}
+	
+	WebElement element() {
+		return element;
+	}
 
 	@Override
 	public Element find(By by) {

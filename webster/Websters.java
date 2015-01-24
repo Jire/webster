@@ -27,5 +27,5 @@ public final class Websters {
 	public static Webster phantom() {
 		return selenium(new PhantomJSDriver());
 	}
-
+	
 }

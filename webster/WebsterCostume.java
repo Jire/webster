@@ -48,4 +48,14 @@ public abstract class WebsterCostume implements Webster, Runnable {
 		return webster.source();
 	}
 
+	@Override
+	public final Wait waitFor(long seconds) {
+		return webster.waitFor(seconds);
+	}
+
+	@Override
+	public final Selector select(By by) {
+		return webster.select(by);
+	}
+
 }

@@ -3,6 +3,7 @@ package webster;
 import java.util.ArrayList;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 final class SeleniumWebster implements Webster {
 
@@ -10,10 +11,17 @@ final class SeleniumWebster implements Webster {
 		return new SeleniumWebster(driver);
 	}
 
+	static WebDriver driverOf(Webster webster) {
+		if (webster instanceof SeleniumWebster)
+			return ((SeleniumWebster) webster).driver;
+		throw new IllegalArgumentException();
+	}
+
 	private final WebDriver driver;
 
 	private SeleniumWebster(WebDriver driver) {
 		this.driver = driver;
+		driver.switchTo().alert();
 	}
 
 	@Override
@@ -57,6 +65,20 @@ final class SeleniumWebster implements Webster {
 	@Override
 	public String source() {
 		return driver.getPageSource();
+	}
+
+	@Override
+	public Wait waitFor(long seconds) {
+		return SeleniumWait.get(this, seconds);
+	}
+
+	@Override
+	public Selector select(By by) {
+		Element element = find(by);
+		if (element instanceof SeleniumElement)
+			return SeleniumSelector.get(new Select(
+					((SeleniumElement) element).element()));
+		throw new IllegalStateException();
 	}
 
 }
