@@ -49,6 +49,11 @@ public abstract class WebsterCostume implements Webster, Runnable {
 	}
 
 	@Override
+	public final Alert alert() {
+		return webster.alert();
+	}
+
+	@Override
 	public final Wait waitFor(long seconds) {
 		return webster.waitFor(seconds);
 	}

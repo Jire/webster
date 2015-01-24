@@ -14,6 +14,8 @@ public interface Webster extends ElementFinder {
 
 	String source();
 
+	Alert alert();
+
 	Wait waitFor(long seconds);
 
 	Selector select(By by);

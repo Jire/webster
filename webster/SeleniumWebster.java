@@ -21,7 +21,6 @@ final class SeleniumWebster implements Webster {
 
 	private SeleniumWebster(WebDriver driver) {
 		this.driver = driver;
-		driver.switchTo().alert();
 	}
 
 	@Override
@@ -68,6 +67,11 @@ final class SeleniumWebster implements Webster {
 	}
 
 	@Override
+	public Alert alert() {
+		return SeleniumAlert.get(driver.switchTo().alert());
+	}
+
+	@Override
 	public Wait waitFor(long seconds) {
 		return SeleniumWait.get(this, seconds);
 	}
@@ -76,8 +80,8 @@ final class SeleniumWebster implements Webster {
 	public Selector select(By by) {
 		Element element = find(by);
 		if (element instanceof SeleniumElement)
-			return SeleniumSelector.get(new Select(
-					((SeleniumElement) element).element()));
+			return SeleniumSelector.get(new Select(((SeleniumElement) element)
+					.element()));
 		throw new IllegalStateException();
 	}
 
