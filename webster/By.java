@@ -38,7 +38,7 @@ public final class By {
 	}
 
 	public static By cssClass(String cssClass) {
-		return get(org.openqa.selenium.By.cssSelector(cssClass));
+		return get(org.openqa.selenium.By.className(cssClass));
 	}
 
 	public static By cssSelector(String cssSelector) {
